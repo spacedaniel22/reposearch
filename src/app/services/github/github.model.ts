@@ -5,6 +5,8 @@ export interface SearchResponse<T = any> {
 }
 
 export interface RepoInfo {
+    id: number;
+    fullName: string;
     url: string;
     description: string;
     forksCount: number;

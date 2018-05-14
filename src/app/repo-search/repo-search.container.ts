@@ -3,9 +3,17 @@ import {
     ViewEncapsulation,
     ChangeDetectionStrategy,
     OnDestroy,
+    OnInit,
+    ChangeDetectorRef,
 } from "@angular/core";
-import { of, Subscription } from "rxjs";
-import { switchMap, filter, distinctUntilChanged } from "rxjs/operators";
+import { Subscription, Subject } from "rxjs";
+import {
+    switchMap,
+    filter,
+    distinctUntilChanged,
+    debounceTime,
+    throttleTime
+} from "rxjs/operators";
 
 import { GithubService } from "../services/github/github.service";
 import { RepoInfo } from "../services/github/github.model";
@@ -17,33 +25,40 @@ import { RepoInfo } from "../services/github/github.model";
     encapsulation: ViewEncapsulation.None,
     preserveWhitespaces: false
 })
-export class RepoSearchContainer implements OnDestroy {
+export class RepoSearchContainer implements OnInit, OnDestroy {
     repos: RepoInfo[];
 
-    private repos$: Subscription;
-    private inputValue$: Subscription;
+    repos$: Subscription;
+    private searchTerms = new Subject<string>();
 
     constructor(
-        private githubService: GithubService
+        private githubService: GithubService,
+        private changeDetector: ChangeDetectorRef
     ) { }
 
-    ngOnDestroy() {
-        if (this.inputValue$) {
-            this.inputValue$.unsubscribe();
+    ngOnInit(): void {
+        this.repos$ = this.searchTerms.pipe(
+            filter(term => !!term),
+            throttleTime(1000),
+            distinctUntilChanged(),
+            switchMap((term: string) => this.githubService.searchRepo(term))
+        ).subscribe(repos => {
+            this.repos = repos;
+            this.changeDetector.detectChanges();
+        });
+    }
+
+    ngOnDestroy(): void {
+        if (this.repos$) {
+            this.repos$.unsubscribe();
         }
     }
 
-    searchRepo(param: string) {
-        this.repos$ = this.githubService.searchRepo(param)
-            .subscribe(repos => this.repos = repos);
+    search(term: string): void {
+        this.searchTerms.next(term);
     }
 
-    onChange(value: string) {
-        this.inputValue$ = of(value)
-            .pipe(
-                distinctUntilChanged(),
-                filter(text => !!text && text.length >= 2),
-            )
-            .subscribe(text => this.searchRepo(text));
+    trackByRepoId(_index: number, repo: RepoInfo) {
+        return repo.id;
     }
 }

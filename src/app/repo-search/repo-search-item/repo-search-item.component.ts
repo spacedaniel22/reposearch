@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy, ViewEncapsulation } from "@angular/core";
+import { Component, ChangeDetectionStrategy, ViewEncapsulation, Input, OnChanges, SimpleChange } from "@angular/core";
+import { RepoInfo } from "../../services/github/github.model";
 
 @Component({
     selector: "repo-search-item",
@@ -7,6 +8,12 @@ import { Component, ChangeDetectionStrategy, ViewEncapsulation } from "@angular/
     encapsulation: ViewEncapsulation.None,
     preserveWhitespaces: false
 })
-export class RepoSearchItemComponent {
-    title = "";
+export class RepoSearchItemComponent implements OnChanges {
+    @Input() repo: RepoInfo;
+
+    ngOnChanges(changes: { repo: SimpleChange }) {
+        if (!!changes.repo.currentValue) {
+            this.repo = changes.repo.currentValue;
+        }
+    }
 }

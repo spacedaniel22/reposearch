@@ -20,7 +20,9 @@ export class GithubService {
             (`${this.githubConfig.getRepoSearchEndpoint()}${searchParam}`)
             .pipe(
                 map(x => x.items.map(r => ({
-                    url: r.url,
+                    id: r.id,
+                    fullName: r.full_name,
+                    url: r.html_url,
                     description: r.description,
                     stargazersCount: r.stargazers_count,
                     forksCount: r.forks_count,

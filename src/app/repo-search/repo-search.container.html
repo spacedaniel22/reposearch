@@ -1,5 +1,7 @@
 <div class="search">
-    <input type="text" class="search-box" placeholder="Type to search..." (change)="onChange($event.target.value)">
-    <button class="search-button" (click)="onChange($event.target.value)">Search</button>
+    <input type="text" class="search-box" #searchbox placeholder="Type to search..." (keyup)="search(searchbox.value)">
+    <button class="search-button" (click)="search(searchbox.value)">Search</button>
 </div>
-<repo-search-item></repo-search-item>
+<ng-template ngFor let-repo [ngForOf]="repos" [ngForTrackBy]="trackByRepoId">
+    <repo-search-item [repo]="repo"></repo-search-item>
+</ng-template>
