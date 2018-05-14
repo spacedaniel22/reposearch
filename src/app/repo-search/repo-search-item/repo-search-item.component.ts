@@ -8,5 +8,5 @@ import { Component, ChangeDetectionStrategy, ViewEncapsulation } from "@angular/
     preserveWhitespaces: false
 })
 export class RepoSearchItemComponent {
-    title = "test";
+    title = "";
 }

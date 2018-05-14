@@ -20,6 +20,7 @@ import { RepoInfo } from "../services/github/github.model";
 export class RepoSearchContainer implements OnDestroy {
     repos: RepoInfo[];
 
+    private repos$: Subscription;
     private inputValue$: Subscription;
 
     constructor(
@@ -32,13 +33,17 @@ export class RepoSearchContainer implements OnDestroy {
         }
     }
 
+    searchRepo(param: string) {
+        this.repos$ = this.githubService.searchRepo(param)
+            .subscribe(repos => this.repos = repos);
+    }
+
     onChange(value: string) {
         this.inputValue$ = of(value)
             .pipe(
                 distinctUntilChanged(),
-                filter(text => !!text && text.length >= 3),
-                switchMap(text => this.githubService.searchRepo(text)),
-        )
-            .subscribe(repos => this.repos = repos);
+                filter(text => !!text && text.length >= 2),
+            )
+            .subscribe(text => this.searchRepo(text));
     }
 }
