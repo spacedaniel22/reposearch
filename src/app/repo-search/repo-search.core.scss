@@ -1,3 +1,5 @@
+@import "../vars";
+
 repo-search {
     display: flex;
     flex-direction: column;
@@ -9,7 +11,7 @@ repo-search {
         .search-box {
             padding: 0.7em 0.9em;
             width: 14em;
-            border: 0.2rem solid lightslategrey;
+            border: 0.2rem solid $primary-accent-color;
             &:focus {
                 outline: none;
             }
@@ -17,12 +19,26 @@ repo-search {
         .search-button {
             border-radius: 0;
             border: none;
-            background-color: lightslategrey;
+            background-color: $primary-accent-color;
             color: white;
             cursor: pointer;
             &:focus {
                 outline: none;
             }
+        }
+    }
+
+    .repo-search-results {
+        font-size: 1.2rem;
+        width: 45%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 1.4em 0;
+
+        @media (max-width: 1080px) {
+            width: 70%;
         }
     }
 }

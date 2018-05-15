@@ -1,0 +1,19 @@
+@import "../../vars";
+
+$repo-search-item-font-size: 1em;
+$repo-search-item-font-family: monospace;
+$repo-search-item-margin: 0.8em;
+$repo-search-item-padding: 1.1;
+$repo-search-item-width: 33%;
+$repo-search-item-bg-color: $primary-accent-color;
+$repo-search-item-color: $light-1;
+
+repo-search-item {
+    font-size: $repo-search-item-font-size;
+    font-family: $repo-search-item-font-family;
+    margin: $repo-search-item-margin;
+    width: calc(#{$repo-search-item-width} - (2 * #{$repo-search-item-padding}em));
+    padding: #{$repo-search-item-padding}em;
+    background-color: $repo-search-item-bg-color;
+    color: $repo-search-item-color;
+}

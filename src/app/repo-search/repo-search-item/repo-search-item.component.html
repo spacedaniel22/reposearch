@@ -1,7 +1,13 @@
-<div>{{ repo.id }}</div>
-<div>{{ repo.fullName }}</div>
-<div>{{ repo.description }}</div>
-<div>{{ repo.url }}</div>
-<div>{{ repo.forksCount }}</div>
-<div>{{ repo.stargazersCount }}</div>
-<div>{{ repo.openIssuesCount }}</div>
+<div class="repo-search-item">
+    <div class="repo-search-item-header">
+        <span>{{ repo.id }}</span>
+        <span>{{ repo.fullName }}</span>
+    </div>
+    <p>{{ repo.description }}</p>
+    <div class="repo-search-item-numbers">
+        <span>{{ repo.forksCount }}</span>
+        <span>{{ repo.stargazersCount }}</span>
+        <span>{{ repo.openIssuesCount }}</span>
+    </div>
+    <a [href]="repo.url" target="_blank">Open Repo in Github</a>
+</div>
