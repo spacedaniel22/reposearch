@@ -1,13 +1,14 @@
-<div class="repo-search-item">
-    <div class="repo-search-item-header">
-        <span>{{ repo.id }}</span>
-        <span>{{ repo.fullName }}</span>
-    </div>
-    <p>{{ repo.description }}</p>
-    <div class="repo-search-item-numbers">
-        <span>{{ repo.forksCount }}</span>
-        <span>{{ repo.stargazersCount }}</span>
-        <span>{{ repo.openIssuesCount }}</span>
-    </div>
+<div class="header">
+    {{ repo.fullName }}
+</div>
+<p>{{ repo.description || 'Missing description'}}</p>
+<div class="numbers">
+    <span>forks: {{ repo.forksCount }}</span>
+    <span>stars: {{ repo.stargazersCount }}</span>
+</div>
+<div class="buttons">
+    <a (click)="openIssues()" class="issues-link" [ngClass]="{'disabled': isDisabled}">
+        Check out {{ repo.openIssuesCount }} open {{issuesWord}}
+    </a>
     <a [href]="repo.url" target="_blank">Open Repo in Github</a>
 </div>

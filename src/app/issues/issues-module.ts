@@ -2,8 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
-import { RepoSearchContainer } from "./repo-search.container";
-import { RepoSearchItemComponent } from "./repo-search-item/repo-search-item.component";
+import { IssuesPage } from "./issues.page";
 
 import { GithubService } from "../services/github/github.service";
 import { GithubConfig } from "../services/github/github.config";
@@ -14,16 +13,11 @@ import { GithubConfig } from "../services/github/github.config";
         FormsModule
     ],
     declarations: [
-        RepoSearchContainer,
-        RepoSearchItemComponent
+        IssuesPage
     ],
-    providers: [
-        GithubService,
-        GithubConfig
-    ],
+    providers: [],
     exports: [
-        RepoSearchContainer,
-        RepoSearchItemComponent
+        IssuesPage
     ]
 })
-export class RepoSearchModule { }
+export class IssuesModule { }

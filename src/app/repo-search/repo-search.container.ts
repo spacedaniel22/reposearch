@@ -9,11 +9,11 @@ import {
 import { ActivatedRoute, ParamMap } from "@angular/router";
 import { Subscription, Subject, merge } from "rxjs";
 import {
+    map,
     switchMap,
     filter,
     distinctUntilChanged,
-    debounceTime,
-    tap,
+    debounceTime
 } from "rxjs/operators";
 
 import { GithubService } from "../services/github/github.service";
@@ -23,8 +23,7 @@ import { RepoInfo } from "../services/github/github.model";
     selector: "repo-search",
     templateUrl: "./repo-search.container.html",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
-    preserveWhitespaces: false
+    encapsulation: ViewEncapsulation.None
 })
 export class RepoSearchContainer implements OnInit, OnDestroy {
     repos: RepoInfo[];
@@ -38,11 +37,12 @@ export class RepoSearchContainer implements OnInit, OnDestroy {
         private route: ActivatedRoute
     ) { }
 
-    ngOnInit(): void {
+    ngOnInit() {
         const route$ = this.route.paramMap.pipe(
-            filter((params: ParamMap) => !!params && !!params.get("term")),
-            switchMap((params: ParamMap) => {
-                return this.githubService.searchRepo(params.get("term"));
+            map((params: ParamMap) => params.get("term")),
+            filter((term: string) => !!term),
+            switchMap((term: string) => {
+                return this.githubService.searchRepo(term);
             }));
 
         const repos$ = this.searchTerms.pipe(
@@ -55,13 +55,13 @@ export class RepoSearchContainer implements OnInit, OnDestroy {
         this.data$$ = merge(
             route$,
             repos$
-        ).subscribe(repos => {
+        ).subscribe((repos: RepoInfo[]) => {
             this.repos = repos;
             this.changeDetector.detectChanges();
         });
     }
 
-    ngOnDestroy(): void {
+    ngOnDestroy() {
         if (this.data$$) {
             this.data$$.unsubscribe();
         }

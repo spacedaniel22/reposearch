@@ -17,7 +17,8 @@ export interface RepoInfo {
 export interface IssueInfo {
     id: number;
     title: string;
+    body: string;
     htmlUrl: string;
-    status: string;
+    state: string;
     userName: string;
 }

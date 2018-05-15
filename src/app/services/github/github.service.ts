@@ -39,8 +39,9 @@ export class GithubService {
                 map(x => x.items.map(i => ({
                     id: i.id,
                     title: i.title,
+                    body: i.body,
                     htmlUrl: i.html_url,
-                    status: i.status,
+                    state: i.state,
                     userName: i.user.login
                 }))),
                 catchError(this.handleError)

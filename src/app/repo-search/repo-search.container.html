@@ -2,7 +2,7 @@
     <input type="text" class="search-box" #searchbox placeholder="Type to search..." (keyup)="search(searchbox.value)">
     <button class="search-button" (click)="search(searchbox.value)">Search</button>
 </div>
-<section class="repo-search-results">
+<section class="repo-search-results container">
     <ng-template ngFor let-repo [ngForOf]="repos" [ngForTrackBy]="trackByRepoId">
         <repo-search-item [repo]="repo"></repo-search-item>
     </ng-template>

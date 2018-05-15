@@ -6,17 +6,22 @@ import { RouterModule, Routes } from "@angular/router";
 import { AppComponent } from "./app.component";
 
 import { RepoSearchModule } from "./repo-search/repo-search.module";
+import { IssuesModule } from "./issues/issues-module";
+
+import { GithubService } from "./services/github/github.service";
+import { GithubConfig } from "./services/github/github.config";
+
 import { RepoSearchContainer } from "./repo-search/repo-search.container";
 import { RepoSearchItemComponent } from "./repo-search/repo-search-item/repo-search-item.component";
-import { GithubConfig } from "./services/github/github.config";
-import { GithubService } from "./services/github/github.service";
+import { IssuesPage } from "./issues/issues.page";
 
 const appRoutes: Routes = [
-    { path: "", redirectTo: "search", pathMatch: "full"},
+    { path: "", redirectTo: "search", pathMatch: "full" },
     { path: "search", component: RepoSearchContainer },
-    { path: "search/:term", component: RepoSearchContainer, pathMatch: "prefix" }
-    // { path: **", component: PageNotFoundComponent } pageNotfound
-  ];
+    { path: "search/:term", component: RepoSearchContainer, pathMatch: "prefix" },
+    { path: "issues/:name", component: IssuesPage, pathMatch: "full" },
+    { path: "**", redirectTo: "search" }
+];
 
 @NgModule({
     declarations: [
@@ -29,9 +34,13 @@ const appRoutes: Routes = [
         ),
         BrowserModule,
         HttpClientModule,
-        RepoSearchModule
+        RepoSearchModule,
+        IssuesModule
     ],
-    providers: [ GithubConfig, GithubService ],
-    bootstrap: [ AppComponent ]
+    providers: [
+        GithubConfig,
+        GithubService
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
