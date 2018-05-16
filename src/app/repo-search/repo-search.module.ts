@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
 
 import { RepoSearchContainer } from "./repo-search.container";
 import { RepoSearchItemComponent } from "./repo-search-item/repo-search-item.component";
@@ -10,8 +9,7 @@ import { GithubConfig } from "../services/github/github.config";
 
 @NgModule({
     imports: [
-        CommonModule,
-        FormsModule
+        CommonModule
     ],
     declarations: [
         RepoSearchContainer,

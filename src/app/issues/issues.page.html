@@ -1,3 +1,4 @@
+<h2 class="repo-name">Open Issues for {{ repoName }}</h2>
 <ng-template ngFor let-issue [ngForOf]="issues" [ngForTrackBy]="trackByIssueId">
     <section class="issue-box">
         <h3>opened by
@@ -5,7 +6,7 @@
         </h3>
         <h3 class="title">{{issue.title}}</h3>
         <p>{{issue.body}}</p>
-        <a [href]="issue.htmlUrl" target="_blank">Open Issue in Github</a>
+        <a [href]="issue.htmlUrl" class="button" target="_blank">Open Issue in Github</a>
         <h3 class="state">{{issue.state}}</h3>
     </section>
 </ng-template>

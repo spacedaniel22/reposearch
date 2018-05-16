@@ -7,8 +7,8 @@
     <span>stars: {{ repo.stargazersCount }}</span>
 </div>
 <div class="buttons">
-    <a (click)="openIssues()" class="issues-link" [ngClass]="{'disabled': isDisabled}">
+    <a (click)="openIssues()" class="issues-link button" [ngClass]="{'disabled': isDisabled}">
         Check out {{ repo.openIssuesCount }} open {{issuesWord}}
     </a>
-    <a [href]="repo.url" target="_blank">Open Repo in Github</a>
+    <a [href]="repo.url" class="button" target="_blank">Open Repo in Github</a>
 </div>

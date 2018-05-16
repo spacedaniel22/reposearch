@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
-import { map, mapTo, catchError } from "rxjs/operators";
+import { map, catchError } from "rxjs/operators";
 
 import { GithubConfig } from "./github.config";
 import { IssueInfo, SearchResponse, RepoInfo } from "./github.model";

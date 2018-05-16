@@ -1,33 +1,52 @@
 @import "../vars";
+$issues-page-width: 40%;
+$issues-page-lg-width: 30%;
+$issues-page-font-size: 1.2rem;
+$issues-page-font-family: monospace;
+$issues-page-box-border: 3px solid $primary-accent-color;
+$issues-page-box-margin-padding: 1.1em;
+
 issues-page {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 50%;
+    width: $issues-page-width;
     margin: 0 auto;
-    font-size: 1.2rem;
+    font-size: $issues-page-font-size;
+    font-family: $issues-page-font-family;
+    @media (min-width: 1200px) {
+        width: $issues-page-lg-width;
+    }
+    .repo-name {
+        font-weight: 200;
+        align-self: flex-start;
+        color: $red;
+    }
     .issue-box {
         width: 100%;
         position: relative;
-        border: 3px solid $primary-accent-color;
-        margin-bottom: 1.1em;
-        padding: 1.1em;
+        border: $issues-page-box-border;
+        margin-bottom: $issues-page-box-margin-padding;
+        padding: $issues-page-box-margin-padding;
         h3 {
             margin: 0;
         }
         .title {
-            margin-top: 1.1em;
+            margin-top: $issues-page-box-margin-padding;
         }
         p {
-            font-size: 1.1em;
+            font-size: $issues-page-box-margin-padding;
             word-break: break-word;
         }
         .state {
             position: absolute;
-            top: 1.1em;
-            right: 1.1em;
+            top: $issues-page-box-margin-padding;
+            right: $issues-page-box-margin-padding;
             font-style: italic;
             color: $green;
+        }
+        .button {
+            display: inline-block;
         }
     }
 }

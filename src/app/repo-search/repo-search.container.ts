@@ -41,15 +41,15 @@ export class RepoSearchContainer implements OnInit, OnDestroy {
         const route$ = this.route.paramMap.pipe(
             map((params: ParamMap) => params.get("term")),
             filter((term: string) => !!term),
-            switchMap((term: string) => {
+            switchMap(term => {
                 return this.githubService.searchRepo(term);
             }));
 
         const repos$ = this.searchTerms.pipe(
-            filter(term => !!term),
+            filter((term: string) => !!term),
             debounceTime(500),
             distinctUntilChanged(),
-            switchMap((term: string) => this.githubService.searchRepo(term))
+            switchMap(term => this.githubService.searchRepo(term))
         );
 
         this.data$$ = merge(

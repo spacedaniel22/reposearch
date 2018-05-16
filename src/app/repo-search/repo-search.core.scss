@@ -1,16 +1,24 @@
 @import "../vars";
+$repo-search-margin-top: 6em;
+$repo-search-box-padding: 0.7em 0.9em;
+$repo-search-search-box-width: 14em;
+$repo-search-search-box-border: 0.2rem solid $primary-accent-color;
+$repo-search-search-button-color: white;
+$repo-search-search-results-font-size: 1.2rem;
+$repo-search-search-results-padding: 1.4em 0;
+$repo-search-search-results-md-width: 70%;
+
 repo-search {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 1.4rem;
-    margin-top: 6em;
+    margin-top: $repo-search-margin-top;
     .search {
         display: flex;
         .search-box {
-            padding: 0.7em 0.9em;
-            width: 14em;
-            border: 0.2rem solid $primary-accent-color;
+            padding: $repo-search-box-padding;
+            width: $repo-search-search-box-width;
+            border: $repo-search-search-box-border;
             &:focus {
                 outline: none;
             }
@@ -19,7 +27,7 @@ repo-search {
             border-radius: 0;
             border: none;
             background-color: $primary-accent-color;
-            color: white;
+            color: $repo-search-search-button-color;
             cursor: pointer;
             &:focus {
                 outline: none;
@@ -27,10 +35,10 @@ repo-search {
         }
     }
     .repo-search-results {
-        font-size: 1.2rem;
-        padding: 1.4em 0;
+        font-size: $repo-search-search-results-font-size;
+        padding: $repo-search-search-results-padding;
         @media (min-width: 340px) and (max-width: 1320px) {
-            width: 70%;
+            width: $repo-search-search-results-md-width;
         }
     }
 }

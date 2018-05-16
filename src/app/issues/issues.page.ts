@@ -21,7 +21,7 @@ import { GithubService } from "../services/github/github.service";
 })
 export class IssuesPage implements OnInit, OnDestroy {
     issues: IssueInfo[];
-
+    repoName: string;
     private route$: Subscription;
 
     constructor(
@@ -34,6 +34,7 @@ export class IssuesPage implements OnInit, OnDestroy {
         this.route$ = this.route.paramMap.pipe(
             map((params: ParamMap) => params.get("name")),
             filter((term: string) => !!term),
+            tap(term => this.repoName = term),
             switchMap(term => this.githubService.searchIssues(term)),
             map((issues: IssueInfo[]) => issues.filter(i => i.state === "open"))
         ).subscribe((issues: IssueInfo[]) => {

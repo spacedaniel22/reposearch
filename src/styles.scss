@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import "./app/vars";
 @import "./app/app.component";
+
 :root {
     font-size: 10px;
 }
@@ -20,6 +21,15 @@ body {
 .container {
     width: 50%;
     display: flex;
-    flex-direction: row;flex-wrap: wrap;
-justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
+ .button {
+    display: block;
+    text-decoration: none;
+    color: $repo-search-item-github-link-color;
+    background-color: $repo-search-item-header-color;
+    padding: $repos-search-item-link-padding;
+    cursor: pointer;
+ }

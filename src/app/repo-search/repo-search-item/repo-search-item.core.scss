@@ -38,14 +38,6 @@ repo-search-item {
     }
     .buttons {
         margin-top: $repos-search-item-link-margin;
-        a {
-            display: block;
-            text-decoration: none;
-            color: $repo-search-item-github-link-color;
-            background-color: $repo-search-item-header-color;
-            padding: $repos-search-item-link-padding;
-            cursor: pointer;
-        }
         .issues-link {
             background-color: $repo-search-item-issues-link-bg-color;
             color: $light-1;
